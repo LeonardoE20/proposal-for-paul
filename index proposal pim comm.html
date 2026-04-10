@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Job & Materials Coordination — Proposal for Paul Pimentel</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --ink: #1a1a1a;
+    --muted: #6a6a6a;
+    --light: #f7f7f5;
+    --border: #e2e0da;
+    --accent: #1d3557;
+    --accent2: #e63946;
+    --green: #2a7d4f;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 300;
+    line-height: 1.65;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 48px 28px 80px;
+  }
+
+  /* TOP BAR */
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 28px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 36px;
+    animation: fadeIn 0.5s ease both;
+  }
+
+  .company {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    color: var(--accent);
+  }
+
+  .doc-info {
+    text-align: right;
+  }
+
+  .doc-info .label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  .doc-info .value {
+    font-size: 13px;
+    color: var(--ink);
+    font-weight: 400;
+  }
+
+  /* TITLE BLOCK */
+  .title-block {
+    margin-bottom: 36px;
+    animation: fadeIn 0.5s 0.1s ease both;
+  }
+
+  .proposal-tag {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: 2px;
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    line-height: 1.15;
+    color: var(--ink);
+    font-weight: 600;
+    margin-bottom: 14px;
+    letter-spacing: -0.5px;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 520px;
+    line-height: 1.7;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 32px 0;
+  }
+
+  /* OPENING */
+  .opening {
+    background: var(--light);
+    border-left: 3px solid var(--accent);
+    padding: 20px 22px;
+    border-radius: 0 4px 4px 0;
+    margin-bottom: 36px;
+    animation: fadeIn 0.5s 0.15s ease both;
+  }
+
+  .opening p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--ink);
+  }
+
+  /* SECTION HEADER */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .section-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    color: var(--accent2);
+    font-weight: 600;
+    min-width: 20px;
+  }
+
+  .section-title {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  /* PROBLEM BLOCK */
+  .problem-block {
+    margin-bottom: 36px;
+    animation: fadeIn 0.5s 0.2s ease both;
+  }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 4px;
+  }
+
+  .problem-item {
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 14px 16px;
+  }
+
+  .problem-item .icon {
+    font-size: 18px;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .problem-item .p-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+
+  .problem-item .p-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* WHAT I'LL DO */
+  .deliverables {
+    margin-bottom: 36px;
+    animation: fadeIn 0.5s 0.25s ease both;
+  }
+
+  .deliverable-row {
+    display: flex;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+
+  .deliverable-row:last-child {
+    border-bottom: none;
+  }
+
+  .d-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--border);
+    line-height: 1;
+    min-width: 32px;
+    font-weight: 600;
+  }
+
+  .d-content {}
+
+  .d-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .d-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .d-result {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--green);
+    letter-spacing: 0.5px;
+  }
+
+  .d-result::before {
+    content: '→ ';
+  }
+
+  /* HOW IT WORKS */
+  .system-block {
+    margin-bottom: 36px;
+    animation: fadeIn 0.5s 0.3s ease both;
+  }
+
+  .flow-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 4px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .flow-step {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+    background: white;
+    transition: background 0.2s;
+  }
+
+  .flow-step:last-child {
+    border-bottom: none;
+  }
+
+  .flow-step:hover {
+    background: var(--light);
+  }
+
+  .step-arrow {
+    font-size: 11px;
+    color: var(--accent2);
+    min-width: 16px;
+    font-weight: 600;
+  }
+
+  .step-label {
+    font-size: 13px;
+    color: var(--ink);
+    flex: 1;
+  }
+
+  .step-badge {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 3px 8px;
+    border-radius: 20px;
+  }
+
+  .badge-paul {
+    background: #fff0f0;
+    color: var(--accent2);
+    border: 1px solid #f8c8ca;
+  }
+
+  .badge-leo {
+    background: #e8f0f8;
+    color: var(--accent);
+    border: 1px solid #b8cfe8;
+  }
+
+  /* RESULT */
+  .result-block {
+    background: var(--accent);
+    color: white;
+    border-radius: 6px;
+    padding: 24px 26px;
+    margin-bottom: 36px;
+    animation: fadeIn 0.5s 0.35s ease both;
+  }
+
+  .result-block .r-label {
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 10px;
+  }
+
+  .result-block p {
+    font-size: 15px;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.9);
+  }
+
+  .result-block p strong {
+    color: white;
+    font-weight: 600;
+  }
+
+  /* CLOSING */
+  .closing {
+    margin-bottom: 40px;
+    animation: fadeIn 0.5s 0.4s ease both;
+  }
+
+  .closing p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 10px;
+  }
+
+  /* SIGNATURE */
+  .signature {
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    animation: fadeIn 0.5s 0.45s ease both;
+  }
+
+  .sig-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--ink);
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .sig-title {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+  }
+
+  .sig-date {
+    text-align: right;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* ANIMATION */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 500px) {
+    body { padding: 28px 18px 60px; }
+    h1 { font-size: 26px; }
+    .problem-grid { grid-template-columns: 1fr; }
+    .topbar { flex-direction: column; gap: 12px; }
+    .doc-info { text-align: left; }
+    .signature { flex-direction: column; gap: 16px; }
+    .sig-date { text-align: left; }
+  }
+</style>
+
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="company">Pimentel Communications</div>
+  <div class="doc-info">
+    <span class="label">Submitted by</span>
+    <span class="value">Leonardo Escudero</span>
+    <br>
+    <span class="label" style="margin-top:6px;">Date</span>
+    <span class="value">April 2026</span>
+  </div>
+</div>
+
+<!-- TITLE -->
+<div class="title-block">
+  <span class="proposal-tag">Internal Proposal</span>
+  <h1>Taking Job Logistics &amp; Materials Off Your Plate</h1>
+  <p class="subtitle">A simple system so you stop tracking materials in your head — and I handle it end to end.</p>
+</div>
+
+<!-- OPENING -->
+<div class="opening">
+  <p>Paul, I've noticed you're carrying a lot simultaneously — jobs, quotes, walkthroughs, materials, crew coordination. I want to take one real piece off your hands starting now, so you can stay focused on the work that actually moves the business forward.</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- THE PROBLEM -->
+<div class="problem-block">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <span class="section-title">What's Slowing Things Down</span>
+  </div>
+  <div class="problem-grid">
+    <div class="problem-item">
+      <span class="icon">💬</span>
+      <div class="p-title">Materials in text messages</div>
+      <div class="p-desc">What's been ordered, what's ready, what's still pending — living in your phone.</div>
+    </div>
+    <div class="problem-item">
+      <span class="icon">🧠</span>
+      <div class="p-title">Job details in your head</div>
+      <div class="p-desc">PM, crew, address, timeline — no single place to look it up quickly.</div>
+    </div>
+    <div class="problem-item">
+      <span class="icon">📞</span>
+      <div class="p-title">You calling vendors</div>
+      <div class="p-desc">Checking availability, confirming orders, following up on deliveries.</div>
+    </div>
+    <div class="problem-item">
+      <span class="icon">🔄</span>
+      <div class="p-title">Repeat communication</div>
+      <div class="p-desc">Telling me what each PM needs, when, and where — every single time.</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- WHAT I'LL DO -->
+<div class="deliverables">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <span class="section-title">What I'll Own</span>
+  </div>
+
+  <div class="deliverable-row">
+    <div class="d-num">1</div>
+    <div class="d-content">
+      <div class="d-title">Full Material Tracking Per Job</div>
+      <div class="d-desc">Every project gets a complete material list with real-time status — what's ordered, what's ready for pickup, what's been delivered. Updated by me, visible to you anytime.</div>
+      <span class="d-result">You stop getting asked "did you order that yet?"</span>
+    </div>
+  </div>
+
+  <div class="deliverable-row">
+    <div class="d-num">2</div>
+    <div class="d-content">
+      <div class="d-title">Vendor Follow-Up &amp; Coordination</div>
+      <div class="d-desc">I call the suppliers, confirm orders, track delivery timelines, and flag anything that could delay a job before it becomes a problem.</div>
+      <span class="d-result">You're not on the phone with Graybar anymore</span>
+    </div>
+  </div>
+
+  <div class="deliverable-row">
+    <div class="d-num">3</div>
+    <div class="d-content">
+      <div class="d-title">Job Files — One Place Per Project</div>
+      <div class="d-desc">PM, crew, address, timeline, materials, and next action all organized per job. One look and you know exactly where everything stands.</div>
+      <span class="d-result">No more piecing together info from five different places</span>
+    </div>
+  </div>
+
+  <div class="deliverable-row">
+    <div class="d-num">4</div>
+    <div class="d-content">
+      <div class="d-title">Logistics Coordination to the Field</div>
+      <div class="d-desc">I know what each PM needs, when they need it, and where it's going. You tell me once — I handle the rest and update you on anything that changes.</div>
+      <span class="d-result">PMs get what they need without going through you</span>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<div class="system-block">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <span class="section-title">How It Works Day to Day</span>
+  </div>
+  <div class="flow-steps">
+    <div class="flow-step">
+      <span class="step-arrow">→</span>
+      <span class="step-label">New job comes in — you share the basics with me once</span>
+      <span class="step-badge badge-paul">Paul</span>
+    </div>
+    <div class="flow-step">
+      <span class="step-arrow">→</span>
+      <span class="step-label">I set up the job file: PM, crew, address, materials needed</span>
+      <span class="step-badge badge-leo">Leonardo</span>
+    </div>
+    <div class="flow-step">
+      <span class="step-arrow">→</span>
+      <span class="step-label">I contact vendors, track orders, and update material status</span>
+      <span class="step-badge badge-leo">Leonardo</span>
+    </div>
+    <div class="flow-step">
+      <span class="step-arrow">→</span>
+      <span class="step-label">You check the system anytime — everything is current</span>
+      <span class="step-badge badge-paul">Paul</span>
+    </div>
+    <div class="flow-step">
+      <span class="step-arrow">→</span>
+      <span class="step-label">I coordinate delivery to the right PM at the right time</span>
+      <span class="step-badge badge-leo">Leonardo</span>
+    </div>
+    <div class="flow-step">
+      <span class="step-arrow">→</span>
+      <span class="step-label">I flag anything that needs your attention — nothing else</span>
+      <span class="step-badge badge-leo">Leonardo</span>
+    </div>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div class="result-block">
+  <div class="r-label">The outcome for you</div>
+  <p>You don't have to think about materials, vendor calls, or job logistics anymore. <strong>If something needs your attention, I'll bring it to you.</strong> If it doesn't, it's already handled. Your mental load on this goes to zero.</p>
+</div>
+
+<!-- CLOSING -->
+<div class="closing">
+  <p>I've already started building this out for PCI 12502 as a pilot. The system is simple, it doesn't require you to learn anything new, and I can have it fully running within the week.</p>
+  <p>I'd like to take this on permanently. Happy to walk you through what I've built so far.</p>
+</div>
+
+<!-- SIGNATURE -->
+<div class="signature">
+  <div>
+    <div class="sig-name">Leonardo Escudero</div>
+    <div class="sig-title">Warehouse &amp; Operations — Pimentel Communications</div>
+  </div>
+  <div class="sig-date">April 2026</div>
+</div>
+
+</body>
+</html>
